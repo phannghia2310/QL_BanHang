@@ -1,0 +1,38 @@
+﻿--- Tạo thêm các login
+CREATE LOGIN S_GiamDoc WITH PASSWORD = 'giamdoc'
+CREATE LOGIN S_QLBanHang WITH PASSWORD = 'qlbanhang'
+CREATE LOGIN S_QLNhapHang WITH PASSWORD = 'qlnhaphang'
+CREATE LOGIN S_QLXuatHang WITH PASSWORD = 'qlxuathang'
+CREATE LOGIN S_NVBanHang WITH PASSWORD = 'nvbanhang'
+CREATE LOGIN S_NVNhapHang WITH PASSWORD = 'nvnhaphang'
+CREATE LOGIN S_NVXuatHang WITH PASSWORD = 'nvxuathang'
+CREATE LOGIN S_KhachHang WITH PASSWORD = 'khachhang'
+
+--- Tạo database users:
+CREATE USER US_GiamDoc FOR LOGIN S_GiamDoc
+CREATE USER US_QLBanHang FOR LOGIN S_QLBanHang
+CREATE USER US_QLNhapHang FOR LOGIN S_QLNhapHang
+CREATE USER US_QLXuatHang FOR LOGIN S_QLXuatHang
+CREATE USER US_NVBanHang FOR LOGIN S_NVBanHang
+CREATE USER US_NhapHang FOR LOGIN S_NVNhapHang
+CREATE USER US_XuatHang FOR LOGIN S_NVXuatHang
+CREATE USER US_KhachHang FOR LOGIN S_KhachHang
+
+---- Phân quyền ở mức bảng:
+GRANT SELECT, INSERT, UPDATE, DELETE ON QuanLyBanHang.HoaDonBanHang TO US_QLBanHang
+--DENY SELECT ON HoaDonBanHang TO US_NVQLBanHang
+GRANT SELECT, INSERT, UPDATE, DELETE ON QuanLyBanHang.ChiTietHoaDon TO US_QLBanHang
+--DENY SELECT ON ChiTietHoaDon TO US_NVQLBanHang
+GRANT SELECT, INSERT, UPDATE, DELETE ON QuanLyBanHang.PhieuNhap TO US_QLNhapHang
+--DENY SELECT ON PhieuNhap TO US_NVQLNhapHang
+GRANT SELECT, INSERT, UPDATE, DELETE ON QuanLyBanHang.ChiTietPhieuNhap TO US_QLNhapHang
+--DENY SELECT ON ChiTietPhieuNhap TO US_NVQLNhapHang
+GRANT SELECT, INSERT, UPDATE, DELETE ON QuanLyBanHang.PhieuXuat TO US_QLXuatHang
+--DENY SELECT ON PhieuXuat TO US_NVQLNhapHang
+GRANT SELECT, INSERT, UPDATE, DELETE ON QuanLyBanHang.ChiTietPhieuXuat TO US_QLXuatHang
+--DENY SELECT ON ChiTietPhieuXuat TO US_NVQLXuatHang
+
+---- Phân quyền ở mức cột:
+GRANT SELECT ON QuanLyBanHang.ChiTietHoaDon(MaHD, MaHang, SoLuong, GiaBan, VAT, ThanhTien) TO
+US_KhachHang
+--REVOKE GRANT OPTION FOR SELECT ON BanHang.CT_HoaDon TO US_KhachHang CASCADE

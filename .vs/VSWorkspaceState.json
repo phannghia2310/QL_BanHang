@@ -6,6 +6,6 @@
     "\\QLBanHangDB\\DataLayer",
     "\\QLBanHangDB\\Forms"
   ],
-  "SelectedNode": "\\QLBanHangDB\\Forms\\frmMain.cs",
+  "SelectedNode": "\\QLBanHangDB\\DataLayer\\SqlHelper.cs",
   "PreviewInSolutionExplorer": false
 }
